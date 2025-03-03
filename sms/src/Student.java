@@ -27,11 +27,11 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student[" +
-                "name=" + name +
+        return "Student{" +
+                "ID=" + ID +
+                ", name=" + name +
                 ", age=" + age +
-                ", ID=" + ID +
                 ", program=" + program +
-                "]";
+                "}";
     }
 }

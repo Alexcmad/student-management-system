@@ -93,4 +93,76 @@ public class Database {
         }
         return students;
     }
+
+    public static int updateStudentName(int id, String name){
+        var sql = "UPDATE students SET name = ? WHERE id = ?";
+        try(var conn = connect(); var psmt = conn.prepareStatement(sql)) {
+            psmt.setString(1, name);
+            psmt.setInt(2, id);
+            int updatedRow = psmt.executeUpdate();
+            if (updatedRow > 0){
+                var rs = psmt.getGeneratedKeys();
+                if (rs.next()){
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int updateStudentAge(int id, int age){
+        var sql = "UPDATE students SET age = ? WHERE id = ?";
+        try(var conn = connect(); var psmt = conn.prepareStatement(sql)) {
+            psmt.setInt(1, age);
+            psmt.setInt(2, id);
+            int updatedRow = psmt.executeUpdate();
+            if (updatedRow > 0){
+                var rs = psmt.getGeneratedKeys();
+                if (rs.next()){
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int updateStudentProgram(int id, String program){
+        var sql = "UPDATE students SET program = ? WHERE id = ?";
+        try(var conn = connect(); var psmt = conn.prepareStatement(sql)) {
+            psmt.setString(1, program);
+            psmt.setInt(2, id);
+            int updatedRow = psmt.executeUpdate();
+            if (updatedRow > 0){
+                var rs = psmt.getGeneratedKeys();
+                if (rs.next()){
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int deleteStudent(int id){
+        var sql = "DELETE FROM students WHERE id = ?";
+        try(var conn = connect(); var psmt = conn.prepareStatement(sql)){
+            psmt.setInt(1, id);
+            int updatedRow = psmt.executeUpdate();
+            if (updatedRow > 0){
+                var rs = psmt.getGeneratedKeys();
+                if (rs.next()){
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
+
