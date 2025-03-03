@@ -6,10 +6,10 @@ public class Student {
     private String program;
 
     // Class Constructor
-    public Student(String name, int age, int ID, String program) {
+    public Student(String name, int age, String program) {
         this.name = name;
         this.age = age;
-        this.ID = ID;
+        this.ID = -1;
         this.program = program;
     }
 
@@ -25,4 +25,13 @@ public class Student {
     public void setID(int ID) {this.ID = ID;}
     public void setProgram(String program) {this.program = program;}
 
+    @Override
+    public String toString() {
+        return "Student[" +
+                "name=" + name +
+                ", age=" + age +
+                ", ID=" + ID +
+                ", program=" + program +
+                "]";
+    }
 }
