@@ -9,10 +9,10 @@ The Student Management System (SMS) is a console-based Java application designed
 
 ### 1. Add a Student
 - Input student details: **Name, ID, Age, Course**.
-- Store student details in a data structure.
+- Store student details in a database.
 
 ### 2. View All Students
-- Display a list of all students.
+- Retrieve and display a list of all students from the database.
 - Show student details in a structured format.
 
 ### 3. Search for a Student
@@ -27,13 +27,13 @@ The Student Management System (SMS) is a console-based Java application designed
 - Remove a student record using **ID**.
 - Confirm before deleting.
 
-### 6. Save Data to a File
-- Save student records to a `.txt` or `.csv` file.
+### 6. Save Data to PostgreSQL Database
+- Store student records in a **PostgreSQL database**.
 - Ensure data persists even after restarting the program.
 
-### 7. Load Data from a File
-- Read student records from a file at program startup.
-- Populate the student list with existing data.
+### 7. Load Data from PostgreSQL Database
+- Retrieve student records from the database at program startup.
+- Populate the student list dynamically.
 
 ---
 
@@ -41,27 +41,38 @@ The Student Management System (SMS) is a console-based Java application designed
 
 ### 1. Programming Concepts Used
 - **Object-Oriented Programming (OOP)**: Utilize classes, objects, and encapsulation.
-- **Collections Framework**: Use `ArrayList<Student>` to manage student records.
-- **File Handling**: Implement reading and writing functionality.
-- **Exception Handling**: Ensure robustness against invalid inputs.
+- **JDBC (Java Database Connectivity)**: Use JDBC to interact with PostgreSQL.
+- **Collections Framework**: Use `ArrayList<Student>` for in-memory operations.
+- **Exception Handling**: Ensure robustness against invalid inputs and database errors.
 
-### 2. Class Structure
+### 2. Database Schema (PostgreSQL)
+#### **Table: students**
+```sql
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    course VARCHAR(100) NOT NULL
+);
+```
+
+### 3. Class Structure
 #### **Student Class**
 - **Fields**: ID, Name, Age, Course.
 - **Methods**: Getters, setters, and a constructor.
 
-#### **StudentManager Class**
-- **Stores a list of students**.
+#### **DatabaseManager Class**
+- Handles all database operations.
 - **Methods**:
-  - `addStudent(Student student)`
-  - `viewStudents()`
-  - `searchStudent(String id)`
-  - `updateStudent(String id, String newName, int newAge, String newCourse)`
-  - `deleteStudent(String id)`
-  - `saveToFile()`
-  - `loadFromFile()`
+  - `connect()` - Establish connection to PostgreSQL.
+  - `addStudent(Student student)` - Insert a new student into the database.
+  - `viewStudents()` - Retrieve all students from the database.
+  - `searchStudent(String id)` - Find a student by ID.
+  - `updateStudent(String id, String newName, int newAge, String newCourse)` - Update student details.
+  - `deleteStudent(String id)` - Delete a student by ID.
+  - `closeConnection()` - Close the database connection.
 
-### 3. User Interface
+### 4. User Interface
 - Console-based **menu-driven** system.
 - Users interact via numbered menu options.
 - Ensure proper input validation.
@@ -71,7 +82,7 @@ The Student Management System (SMS) is a console-based Java application designed
 ## Extra Features (Optional Enhancements)
 - **Sort Students**: Allow sorting by **Name, Age, or Course**.
 - **Graphical User Interface (GUI)**: Implement using **JavaFX** or **Swing**.
-- **Database Integration**: Use **SQLite** or **MySQL** instead of file storage.
+- **REST API**: Build a web service using **Spring Boot**.
 
 ---
 
@@ -80,16 +91,17 @@ By completing this project, you will gain hands-on experience with:
 - ✅ **OOP principles** (Encapsulation, Classes, Methods)
 - ✅ **Handling user input** with Scanner
 - ✅ **Managing data structures** using `ArrayList<>`
-- ✅ **Working with file handling** in Java
+- ✅ **Working with PostgreSQL and JDBC** in Java
 - ✅ **Basic Java logic & flow control**
+- ✅ **Database transactions and SQL queries**
 
 ---
 
 ## Next Steps
-1. **Set up your Java project**.
-2. **Define the `Student` and `StudentManager` classes**.
-3. **Implement basic CRUD (Create, Read, Update, Delete) operations**.
-4. **Add file handling for data persistence**.
+1. **Set up PostgreSQL and create the database**.
+2. **Define the `Student` and `DatabaseManager` classes**.
+3. **Implement JDBC operations (CRUD - Create, Read, Update, Delete)**.
+4. **Integrate database interactions with the console UI**.
 5. **Test the application with sample student records**.
 
 ---
